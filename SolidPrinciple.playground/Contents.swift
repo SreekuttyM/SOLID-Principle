@@ -79,3 +79,22 @@ extension Int {
 var num : Int = 2
 print(num.squared())
 
+//another practical exmaple
+//eg for firstly violation of OCP
+
+
+struct InvoiceOCP {
+    let invoice : Invoice
+    
+    
+    func saveToDB() {
+        //save invoice locally or to database
+        print("save to FireBase\(invoice.id)")
+    }
+    
+    func saveToCoreData() {
+        //save invoice locally or to database
+        print("save to CoreData\(invoice.id)")
+
+    }
+}
