@@ -179,3 +179,52 @@ struct SingleTapButton : SingleTapProtocol {
     func didLonPress() {}
 }
 
+//MARK: - Depedency Inversion Principle(DIP)
+/*
+ Notes:
+   High Level modules should not depend on low level modules, but should depend on abstraction
+ If any high level module imports any low level module then the code becomes tightly coupled.
+ Changes in one class could break another class.
+ */
+
+//for eg
+protocol PaymentMethod {
+    func execute(amount: Double)
+}
+
+
+struct DebitcardPayment:PaymentMethod {
+    func execute(amount: Double) {
+        print("Debit Card Payment Success for \(amount)")
+    }
+}
+
+struct StripePayment:PaymentMethod {
+    func execute(amount: Double) {
+        print("Stripe Payment Success for \(amount)")
+    }
+}
+
+struct ApplePayPayment:PaymentMethod {
+    func execute(amount: Double) {
+        print("ApplePay Payment Success for \(amount)")
+    }
+}
+
+struct Payment {
+    var debitCardPayment: DebitcardPayment?
+    var applePayPayment:  ApplePayPayment?
+    var stripePayment: StripePayment?
+
+}
+
+struct PaymentDIp {
+    let paymentMethod  : PaymentMethod
+    func makePayment(amount:Double) {
+        paymentMethod.execute(amount: 20)
+    }
+}
+let stripePayment = StripePayment()
+let paymentDIP = PaymentDIp(paymentMethod: stripePayment)
+paymentDIP.makePayment(amount: 20)
+
