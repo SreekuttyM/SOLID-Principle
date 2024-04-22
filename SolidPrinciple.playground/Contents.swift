@@ -80,21 +80,40 @@ var num : Int = 2
 print(num.squared())
 
 //another practical exmaple
-//eg for firstly violation of OCP
 
-
+// here new features are extendable with the usage of protocol
+//we can create new struct to define new funcationalitites to save data
 struct InvoiceOCP {
-    let invoice : Invoice
+    let persistance : InvoicePersistable
     
-    
-    func saveToDB() {
-        //save invoice locally or to database
-        print("save to FireBase\(invoice.id)")
+    func save(invoice:Invoice) {
+        persistance.save(invoice: invoice)
     }
     
-    func saveToCoreData() {
-        //save invoice locally or to database
-        print("save to CoreData\(invoice.id)")
+//    func saveToDB() {
+//        //save invoice locally or to database
+//        print("save to FireBase\(invoice.id)")
+//    }
+//    
+//    func saveToCoreData() {
+//        //save invoice locally or to database
+//        print("save to CoreData\(invoice.id)")
+//
+//    }
+}
 
+protocol InvoicePersistable {
+    func save(invoice:Invoice)
+}
+
+struct CoreDataPersistence : InvoicePersistable {
+    func save(invoice: Invoice) {
+        print("save to CoreData\(invoice.id)")
+    }
+}
+
+struct DBPersistence : InvoicePersistable {
+    func save(invoice: Invoice) {
+        print("save to FireBase\(invoice.id)")
     }
 }
