@@ -117,3 +117,32 @@ struct DBPersistence : InvoicePersistable {
         print("save to FireBase\(invoice.id)")
     }
 }
+
+// Note: This example  is a combination of OCP and SRP
+
+//MARK: - Liskov Substitution Principle
+/*
+ Notes:
+    Derived or child classes/structures must be substitutable for their base or parent class
+ */
+
+//eg
+
+enum APIError : Error {
+    case invalidURL
+    case invalidResponse
+    case invalidStatusCode
+}
+
+struct MockUserService {
+    func fetchUser() async throws {
+        do {
+            throw APIError.invalidResponse
+        } catch {
+            print("Error:\(error)")
+        }
+    }
+}
+
+
+
