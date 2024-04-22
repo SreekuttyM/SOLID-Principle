@@ -23,17 +23,16 @@ struct Invoice {
         return total - discountedAmount
     }
     
-//    func printInvoice() {
-//        print("--------")
-//        print("Invoice id :\(id)")
-//        print("Total cost :\(total)")
-//        print("Discounts  :\(discountPercentage)")
-//        print("--------")
-//    }
+    func printInvoice() {
+        let printInvoice = InvoicePrinter(invoice: self)
+        printInvoice.printInvoice()
+    }
     
-//    func saveInvoice() {
-//        //save invoice locally or to database
-//    }
+    func saveInvoice() {
+        //save invoice locally or to database
+        let printInvoice = InvoicePersistance(invoice: self)
+        printInvoice.saveInvoice()
+    }
 }
 
 struct InvoicePrinter {
@@ -57,6 +56,6 @@ struct InvoicePersistance {
 }
 
 let products = [Product.init(price: 120),Product.init(price: 140),Product.init(price: 130)]
-let invoice = Invoice(products: products, discountPercentage: 20)
-let printInvoice = InvoicePrinter(invoice: invoice)
-printInvoice.printInvoice()
+
+let invoice1 = Invoice(products: products, discountPercentage: 20)
+let invoice2 = Invoice(products: products)
