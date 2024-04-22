@@ -12,7 +12,6 @@ struct Product {
     let price : Double
 }
 
-///sample violating the srp
 struct Invoice {
     var products : [Product]
     let id = NSUUID().uuidString
@@ -24,15 +23,40 @@ struct Invoice {
         return total - discountedAmount
     }
     
+//    func printInvoice() {
+//        print("--------")
+//        print("Invoice id :\(id)")
+//        print("Total cost :\(total)")
+//        print("Discounts  :\(discountPercentage)")
+//        print("--------")
+//    }
+    
+//    func saveInvoice() {
+//        //save invoice locally or to database
+//    }
+}
+
+struct InvoicePrinter {
+    let invoice : Invoice
+    
     func printInvoice() {
         print("--------")
-        print("Invoice id :\(id)")
-        print("Total cost :\(total)")
-        print("Discounts  :\(discountPercentage)")
+        print("Invoice id :\(invoice.id)")
+        print("Total cost :\(invoice.total)")
+        print("Discounts  :\(invoice.discountPercentage)")
         print("--------")
     }
-    
+}
+
+struct InvoicePersistance {
+    let invoice : Invoice
+
     func saveInvoice() {
         //save invoice locally or to database
     }
 }
+
+let products = [Product.init(price: 120),Product.init(price: 140),Product.init(price: 130)]
+let invoice = Invoice(products: products, discountPercentage: 20)
+let printInvoice = InvoicePrinter(invoice: invoice)
+printInvoice.printInvoice()
