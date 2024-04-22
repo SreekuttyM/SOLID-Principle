@@ -1,3 +1,10 @@
 import UIKit
 
-var greeting = "Hello, playground"
+//MARK: - SINGLE RESPONSIBILITY PRINCIPLE
+
+/*
+ NOTES:
+ A class should only be responsible for one thing
+ */
+
+
