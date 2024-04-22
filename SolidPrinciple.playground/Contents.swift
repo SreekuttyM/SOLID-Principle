@@ -59,3 +59,23 @@ let products = [Product.init(price: 120),Product.init(price: 140),Product.init(p
 
 let invoice1 = Invoice(products: products, discountPercentage: 20)
 let invoice2 = Invoice(products: products)
+
+
+//MARK: - OPEN CLOSED PRINCIPLE (OCP)
+
+/*
+ NOTES:
+  Software entities(classes,modules,functions etc..) should be open for extension but closed for modification.
+  In other words, we can add additional functionality (extension) without modifyting the existing behaviour (modification) of the object.
+ */
+//eg with swift provided extensions
+
+extension Int {
+    func squared() -> Int {
+        return self * self
+    }
+}
+
+var num : Int = 2
+print(num.squared())
+
