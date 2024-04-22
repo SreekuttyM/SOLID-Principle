@@ -146,3 +146,36 @@ struct MockUserService {
 
 
 
+//MARK: - Interface Segregation Principle
+/*
+ Notes:
+    Do not force the client to implement an interface which is irrevelant to them
+ */
+
+//eg
+
+
+protocol SingleTapProtocol {
+    func didTap()
+}
+
+protocol DoubleTapProtocol {
+    func didDoubleTap()
+}
+
+protocol LongPressProtocol {
+    func didLonPress()
+}
+
+struct SuperButton : SingleTapProtocol,DoubleTapProtocol,LongPressProtocol {
+    func didTap() {}
+    func didDoubleTap() {}
+    func didLonPress() {}
+}
+
+struct SingleTapButton : SingleTapProtocol {
+    func didTap() {}
+    func didDoubleTap() {}
+    func didLonPress() {}
+}
+
